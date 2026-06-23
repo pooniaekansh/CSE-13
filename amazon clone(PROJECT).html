@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Amazon Clone</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background-color: #e3e6e6;
+        }
+
+        /* Navbar */
+        .navbar {
+            background-color: #131921;
+            color: white;
+            min-height: 70px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            padding: 10px 25px;
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .logo span {
+            color: #ff9900;
+        }
+
+        .location,
+        .nav-text {
+            display: flex;
+            flex-direction: column;
+            font-size: 14px;
+        }
+
+        .location small,
+        .nav-text small {
+            color: #cccccc;
+        }
+
+        .search-box {
+            display: flex;
+            flex: 1;
+            height: 42px;
+        }
+
+        .search-box select {
+            width: 60px;
+            border: none;
+            padding: 8px;
+            cursor: pointer;
+        }
+
+        .search-box input {
+            flex: 1;
+            border: none;
+            padding: 10px;
+            font-size: 15px;
+            outline: none;
+        }
+
+        .search-box button {
+            width: 55px;
+            border: none;
+            background-color: #febd69;
+            font-size: 20px;
+            cursor: pointer;
+        }
+
+        .search-box button:hover {
+            background-color: #f3a847;
+        }
+
+        .cart {
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        #cartCount {
+            color: #ff9900;
+        }
+
+        /* Menu Bar */
+        .menu-bar {
+            background-color: #232f3e;
+            color: white;
+            padding: 12px 25px;
+            display: flex;
+            gap: 25px;
+            font-size: 15px;
+        }
+
+        .menu-bar span {
+            cursor: pointer;
+        }
+
+        .menu-bar span:hover {
+            text-decoration: underline;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 350px;
+            background-image: linear-gradient(rgba(0, 0, 0, 0.4),
+                    rgba(0, 0, 0, 0.4)),
+                url("https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&w=1600&q=80");
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        .hero-text {
+            color: white;
+        }
+
+        .hero-text h1 {
+            font-size: 42px;
+            margin-bottom: 15px;
+        }
+
+        .hero-text p {
+            font-size: 20px;
+            margin-bottom: 20px;
+        }
+
+        .hero-text button {
+            background-color: #ff9900;
+            color: black;
+            border: none;
+            padding: 12px 25px;
+            font-size: 17px;
+            font-weight: bold;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+
+        .hero-text button:hover {
+            background-color: #e68a00;
+        }
+
+        /* Product Section */
+        main {
+            padding: 35px;
+        }
+
+        main h2 {
+            margin-bottom: 25px;
+            color: #131921;
+        }
+
+        .product-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 25px;
+        }
+
+        .product-card {
+            background-color: white;
+            width: 250px;
+            padding: 18px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+            text-align: center;
+        }
+
+        .product-card img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            margin-bottom: 12px;
+        }
+
+        .product-card h3 {
+            margin-bottom: 10px;
+        }
+
+        .product-card p {
+            margin-bottom: 10px;
+            color: #555;
+        }
+
+        .price {
+            color: #b12704 !important;
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .product-card button {
+            background-color: #ffd814;
+            border: 1px solid #fcd200;
+            padding: 10px 15px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        .product-card button:hover {
+            background-color: #f7ca00;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #131921;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            margin-top: 30px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 850px) {
+            .navbar {
+                flex-wrap: wrap;
+                height: auto;
+            }
+
+            .search-box {
+                order: 2;
+                flex-basis: 100%;
+            }
+
+            .menu-bar {
+                overflow-x: auto;
+                white-space: nowrap;
+            }
+
+            .hero-text h1 {
+                font-size: 30px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <div class="navbar">
+            <div class="logo">amazon<span>.in</span></div>
+
+            <div class="location">
+                <small>Deliver to</small>
+                <b>India</b>
+            </div>
+
+            <div class="search-box">
+
+                <input type="text" id="searchInput" placeholder="Search Amazon.in">
+
+                <button onclick="searchProduct()">🔍</button>
+            </div>
+
+            <div class="nav-text">
+                <small>Hello, Sign in</small>
+                <b>Account & Lists</b>
+            </div>
+
+            <div class="nav-text">
+                <small>Returns</small>
+                <b>& Orders</b>
+            </div>
+
+            <div class="cart">
+                🛒 Cart <span id="cartCount">0</span>
+            </div>
+        </div>
+
+        <div class="menu-bar">
+            <span>☰ All</span>
+            <span>Fresh</span>
+            <span>Amazon Pay</span>
+            <span>Best Sellers</span>
+            <span>Mobiles</span>
+            <span>Fashion</span>
+            <span>Electronics</span>
+            <span>Customer Service</span>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="hero-text">
+            <h1>Welcome to Amazon Clone</h1>
+            <p>Shop for your favourite products at great prices.</p>
+            <button onclick="scrollToProducts()">Shop Now</button>
+        </div>
+    </section>
+
+    <main id="products">
+        <h2>Featured Products</h2>
+
+        <div class="product-container">
+
+            <div class="product-card">
+                <img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?auto=format&fit=crop&w=500&q=80"
+                    alt="Smartphone">
+                <h3>Smartphone</h3>
+                <p class="price">₹19,999</p>
+                <p>Latest smartphone with high-quality camera.</p>
+                <button onclick="addToCart('Smartphone')">Add to Cart</button>
+            </div>
+
+            <div class="product-card">
+                <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=500&q=80"
+                    alt="Smart Watch">
+                <h3>Smart Watch</h3>
+                <p class="price">₹2,499</p>
+                <p>Fitness tracking and stylish design.</p>
+                <button onclick="addToCart('Smart Watch')">Add to Cart</button>
+            </div>
+
+            <div class="product-card">
+                <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=500&q=80"
+                    alt="Running Shoes">
+                <h3>Running Shoes</h3>
+                <p class="price">₹1,999</p>
+                <p>Comfortable shoes for daily use.</p>
+                <button onclick="addToCart('Running Shoes')">Add to Cart</button>
+            </div>
+
+            <div class="product-card">
+                <img src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=500&q=80"
+                    alt="Coffee Maker">
+                <h3>Coffee Maker</h3>
+                <p class="price">₹3,499</p>
+                <p>Make fresh coffee at home easily.</p>
+                <button onclick="addToCart('Coffee Maker')">Add to Cart</button>
+            </div>
+
+        </div>
+    </main>
+
+    <footer>
+        <p>© 2026 Amazon Clone | Created by Ekansh Poonia</p>
+    </footer>
+
+    <script>
+        let cartItems = 0;
+
+        function addToCart(productName) {
+            cartItems++;
+
+            document.getElementById("cartCount").innerText = cartItems;
+
+            alert(productName + " added to cart!");
+        }
+
+        function searchProduct() {
+            let searchValue = document.getElementById("searchInput").value;
+
+            if (searchValue === "") {
+                alert("Please enter a product name.");
+            } else {
+                alert("You searched for: " + searchValue);
+            }
+        }
+
+        function scrollToProducts() {
+            document.getElementById("products").scrollIntoView({
+                behavior: "smooth"
+            });
+        }
+    </script>
+
+</body>
+</html>
