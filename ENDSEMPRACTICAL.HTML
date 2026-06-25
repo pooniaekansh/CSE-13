@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Student Result</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px gray;
+            width: 350px;
+            text-align: center;
+        }
+
+        h2 {
+            color: #333;
+        }
+
+        input {
+            width: 80%;
+            padding: 8px;
+            margin: 10px 0;
+            font-size: 16px;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        #output {
+            margin-top: 20px;
+            font-size: 18px;
+            color: #222;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h2>Student Result Program</h2>
+
+Enter Number of Subjects:<br><br>
+
+<input type="number" id="sub" placeholder="Enter subjects">
+
+<br><br>
+
+<button onclick="result()">Calculate</button>
+
+<p id="output"></p>
+
+</div>
+
+<script>
+function result() {
+
+    var subjects = document.getElementById("sub").value;
+    var total = 0;
+
+    for(var i = 1; i <= subjects; i++) {
+        var marks = prompt("Enter marks of subject " + i);
+        total = total + Number(marks);
+    }
+
+    var average = total / subjects;
+    var grade;
+
+    if(average >= 60) {
+        grade = "A";
+    }
+    else if(average >= 50) {
+        grade = "B";
+    }
+    else if(average >= 40) {
+        grade = "C";
+    }
+    else {
+        grade = "Fail";
+    }
+
+    document.getElementById("output").innerHTML =
+        "Total Marks = " + total + "<br>" +
+        "Average Marks = " + average.toFixed(2) + "<br>" +
+        "Grade = " + grade;
+}
+</script>
+
+</body>
+</html>
